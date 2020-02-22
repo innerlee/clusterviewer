@@ -21,10 +21,13 @@ namespace viewer.Pages
         public void OnGet()
         {
             ViewData["path"] = Request.Query["path"];
-            if (Directory.Exists(Request.Query["path"])){
+            if (Directory.Exists(Request.Query["path"]))
+            {
                 ViewData["haha"] = Directory.GetFiles(Request.Query["path"]);
-            }else{
-                ViewData["haha"] = new string[]{};
+            }
+            else
+            {
+                ViewData["haha"] = new string[] { };
             }
         }
     }

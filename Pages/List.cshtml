@@ -1,0 +1,16 @@
+﻿@page
+@model ListModel
+@{
+    ViewData["Title"] = "List Images From File";
+}
+<div class="text-center">
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<a href="~/list?list=/mnt/hdd/data/flows/netlist.txt&page=1&pagesize=50">~/list?list=/mnt/hdd/data/flows/netlist.txt&page=1&pagesize=50</a>
+    @foreach (var item in (List<Item>)ViewData["items"])
+    {
+        <div>@item.path</div>
+    }
+</div>
