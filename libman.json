@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "lightgallery@1.6.12",
+      "destination": "wwwroot/lib/lightgallery"
+    },
+    {
+      "library": "lg-thumbnail@1.1.0",
+      "destination": "wwwroot/lib/lg-thumbnail"
+    },
+    {
+      "library": "lg-zoom@1.1.0",
+      "destination": "wwwroot/lib/lg-zoom"
+    }
+  ]
+}
