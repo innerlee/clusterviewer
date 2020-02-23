@@ -47,7 +47,7 @@ namespace viewer
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine("/mnt/hdd/data/flows/hmdb-rgb")),
+                    Path.Combine("/mnt/lustre/share/huanghaoyu/yimin_testset/yimin_testset_data/")),
                 RequestPath = "/StaticFiles"
             });
 

@@ -13,7 +13,7 @@
     <div id="lightgallery">
         @foreach (var item in (List<Item>)ViewData["items"])
         {
-            <a href="StaticFiles/@item.path" title="@item.tag"><img src="StaticFiles/@item.path"></a>
+            <a href="StaticFiles/@item.path" title="@item.tag"><img src="StaticFiles/@item.path" class="img-responsive" style="height: 224px;"></a>
         }
         </div>
     </div>
