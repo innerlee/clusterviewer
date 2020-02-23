@@ -47,7 +47,7 @@ namespace viewer
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine("/mnt/lustre/share/huanghaoyu/huawei_project/religion_cloth/Image/huawei_religion_cloth_20200211/")),
+                    Path.Combine("/")),
                 RequestPath = "/StaticFiles"
             });
 

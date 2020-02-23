@@ -33,6 +33,7 @@ namespace viewer.Pages
 
         public void OnGet()
         {
+            ViewData["root"] = Request.Query["root"];
             ViewData["list"] = Request.Query["list"];
             ViewData["page"] = Request.Query["page"];
             ViewData["pagesize"] = Request.Query["pagesize"];
@@ -54,12 +55,12 @@ namespace viewer.Pages
                         var values = line.Split('\t', 2, StringSplitOptions.RemoveEmptyEntries);
                         if (values.Length == 1)
                         {
-                            items.Add(new Item(values[0], values[0]));
+                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[0]));
                         }
                         else
                         {
 
-                            items.Add(new Item(values[0], values[1]));
+                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[1]));
                         }
                     }
                     ViewData["items"] = items;
