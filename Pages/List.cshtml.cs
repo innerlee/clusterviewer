@@ -59,8 +59,7 @@ namespace viewer.Pages
                         }
                         else
                         {
-
-                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[1]));
+                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[0] + " " + values[1]));
                         }
                     }
                     ViewData["items"] = items;
