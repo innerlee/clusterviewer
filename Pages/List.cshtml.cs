@@ -41,12 +41,12 @@ namespace viewer.Pages
 
             string listfile = Request.Query["list"].ToString();
             int page = 1;
-            if (int.TryParse(ViewData["page"].ToString(), out page))
+            if (int.TryParse(Request.Query["page"].ToString(), out page))
             {
                 ViewData["page"] = page;
             }
-            int pagesize = 50;
-            if (int.TryParse(ViewData["pagesize"].ToString(), out pagesize))
+            int pagesize = 500;
+            if (int.TryParse(Request.Query["pagesize"].ToString(), out pagesize))
             {
                 ViewData["pagesize"] = pagesize;
             }
