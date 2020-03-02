@@ -74,6 +74,7 @@ namespace viewer.Pages
                     ViewData["items"] = items;
                 }
             }
+            ViewData["totalitems"] = items.Count;
             ViewData["items"] = items.Skip((page - 1) * pagesize).Take(pagesize).ToList();
         }
     }

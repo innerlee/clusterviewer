@@ -11,7 +11,8 @@
     root: @(ViewData["root"]) <br/>
     list: @(ViewData["list"]) <br/>
     page: @(ViewData["page"]) <br/>
-    pagesize: @(ViewData["pagesize"])</a>
+    pagesize: @(ViewData["pagesize"]) <br/>
+    total items: @(ViewData["totalitems"])</a>
     </p>
     <p>
         <a class="btn btn-primary" id="download_link" download="@(ViewData["listfile"])_selected_page@(ViewData["page"]).txt" href=”” >Download Selection As <br/>"@(ViewData["listfile"])_selected_page@(ViewData["page"]).txt"</a>
