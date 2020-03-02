@@ -10,23 +10,25 @@ using Microsoft.Extensions.Logging;
 namespace viewer.Pages
 {
 
-    public class Item
+    public class SelectItem
     {
         public string path;
+        public string origpath;
         public string tag;
 
-        public Item(string path, string tag)
+        public SelectItem(string path, string origpath, string tag)
         {
             this.path = path;
+            this.origpath = origpath;
             this.tag = tag;
         }
     }
 
-    public class ListModel : PageModel
+    public class SelectModel : PageModel
     {
-        private readonly ILogger<ListModel> _logger;
+        private readonly ILogger<SelectModel> _logger;
 
-        public ListModel(ILogger<ListModel> logger)
+        public SelectModel(ILogger<SelectModel> logger)
         {
             _logger = logger;
         }
@@ -51,7 +53,7 @@ namespace viewer.Pages
                 ViewData["pagesize"] = pagesize;
             }
 
-            List<Item> items = new List<Item>();
+            List<SelectItem> items = new List<SelectItem>();
             if (System.IO.File.Exists(listfile))
             {
                 using (var reader = new StreamReader(listfile))
@@ -62,11 +64,11 @@ namespace viewer.Pages
                         var values = line.Split('\t', 2, StringSplitOptions.RemoveEmptyEntries);
                         if (values.Length == 1)
                         {
-                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[0]));
+                            items.Add(new SelectItem(Path.Combine(ViewData["root"].ToString(), values[0]), values[0], values[0]));
                         }
                         else
                         {
-                            items.Add(new Item(Path.Combine(ViewData["root"].ToString(), values[0]), values[0] + " " + values[1]));
+                            items.Add(new SelectItem(Path.Combine(ViewData["root"].ToString(), values[0]), values[0], values[0] + " " + values[1]));
                         }
                     }
                     ViewData["items"] = items;

@@ -1,0 +1,51 @@
+﻿@page
+@model SelectModel
+@{
+    ViewData["Title"] = "Select Images From File";
+}
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    <p>
+    <a href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(ViewData["page"])&pagesize=@(ViewData["pagesize"])">
+    root: @(ViewData["root"]) <br/>
+    list: @(ViewData["list"]) <br/>
+    page: @(ViewData["page"]) <br/>
+    pagesize: @(ViewData["pagesize"])</a>
+    </p>
+    <p>
+        <a class="btn btn-primary" id="download_link" download="@(ViewData["listfile"])_selected_page@(ViewData["page"]).txt" href=”” >Download Selection As <br/>"@(ViewData["listfile"])_selected_page@(ViewData["page"]).txt"</a>
+    </p>
+    <ul>
+        @{int i=0;}
+        @foreach (var item in (List<SelectItem>)ViewData["items"])
+        {
+            <li>
+                <input type="checkbox" data-path="@(item.origpath)" data-tag="@(item.tag)" id="cb@(i)" /><label for="cb@(i)">
+                    <img src="StaticFiles/@item.path" class="img-responsive" style="height: 224px;">
+                </label>
+            </li>
+            i++;
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function get_selected(){
+            var c = $('input[type="checkbox"]:checked:not(:disabled)');
+            var files = c.map(function () {
+                return $(this).data('path');
+            }).get();
+            @* var text = files.join('\n');
+            var data = new Blob([text], {type: 'text/plain'});
+            var url = window.URL.createObjectURL(data);
+            document.getElementById('download_link').href = url; *@
+            return files;
+        }
+        $("a#download_link").click(function(){
+            var now = get_selected().join('\n');
+            this.href = "data:text/plain;charset=UTF-8,"  + en deURIComponent(now);
+        });
+    </script>
+}
