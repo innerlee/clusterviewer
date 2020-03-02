@@ -61,7 +61,7 @@ namespace viewer.Pages
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
-                        var values = line.Split('\t', 2, StringSplitOptions.RemoveEmptyEntries);
+                        var values = line.Split(new char[0], 2, StringSplitOptions.RemoveEmptyEntries);
                         if (values.Length == 1)
                         {
                             items.Add(new SelectItem(Path.Combine(ViewData["root"].ToString(), values[0]), values[0], values[0]));
