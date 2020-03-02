@@ -4,7 +4,7 @@
     ViewData["Title"] = "Select Images From File";
 }
 
-<div class="text-center">
+<div class="text-center" style="max-width: 1600px;">
     <h1>@ViewData["Title"]</h1>
     <p>
     <a href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(ViewData["page"])&pagesize=@(ViewData["pagesize"])">
@@ -45,7 +45,7 @@
         }
         $("a#download_link").click(function(){
             var now = get_selected().join('\n');
-            this.href = "data:text/plain;charset=UTF-8,"  + en deURIComponent(now);
+            this.href = "data:text/plain;charset=UTF-8,"  + encodeURIComponent(now);
         });
     </script>
 }
