@@ -231,7 +231,7 @@ label img {
 }
 
 :checked + label {
-  border-color: #ddd;
+  border-color: rgb(255, 0, 0);
 }
 
 :checked + label:before {
