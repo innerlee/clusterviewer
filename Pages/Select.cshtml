@@ -11,21 +11,21 @@
 <div class="text-center" style="max-width: 1600px;">
     <h1>@ViewData["Title"]</h1>
     <p>
-    list: @(ViewData["list"]) <br/>
-    root: @(ViewData["root"]) <br/>
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-end">
-            <li class="page-item @(page<=1?"disabled": "")" href="~/select?list=@(ViewData["list"])">
-                <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page-1)&pagesize=@(pagesize)">Previous</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" herf="">@(page) / @(npages) pages, @(totalitems) items, @(pagesize) per page</a>
-            </li>
-            <li class="page-item @(page>=npages?"disabled": "")">
-                <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page+1)&pagesize=@(pagesize)">Next</a>
-            </li>
-        </ul>
-    </nav>
+        <span class="badge badge-secondary">list</span> @(ViewData["list"]) <br/>
+        <span class="badge badge-secondary">root</span> @(ViewData["root"]) <br/>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item @(page<=1?"disabled": "")" href="~/select?list=@(ViewData["list"])">
+                    <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page-1)&pagesize=@(pagesize)">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" herf="">@(page) / @(npages) pages, @(totalitems) items, @(pagesize) per page</a>
+                </li>
+                <li class="page-item @(page>=npages?"disabled": "")">
+                    <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page+1)&pagesize=@(pagesize)">Next</a>
+                </li>
+            </ul>
+        </nav>
     </p>
     <p>
         <a class="btn btn-primary" id="download_link" download="@(ViewData["listfile"])_selected_page@(page).txt" href=”” >Download Selection As <br/>"@(ViewData["listfile"])_selected_page@(page).txt"</a>
