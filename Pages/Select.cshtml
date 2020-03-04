@@ -46,6 +46,8 @@
 
 @section Scripts {
     <script type="text/javascript">
+        var downloaded = false;
+
         function get_selected(){
             var c = $('input[type="checkbox"]:checked:not(:disabled)');
             var files = c.map(function () {
@@ -60,6 +62,21 @@
         $("a#download_link").click(function(){
             var now = get_selected().join('\n') + '\n';
             this.href = "data:text/plain;charset=UTF-8,"  + encodeURIComponent(now);
+            downloaded = true;
+        });
+
+        var isDirty = function() { return !downloaded && (get_selected().length > 0); }
+
+        window.addEventListener("beforeunload", function (e) {
+            if (!isDirty()) {
+                return undefined;
+            }
+
+            var confirmationMessage = 'It looks like you have selected something. '
+                                    + 'If you leave before downloading, your changes will be lost.';
+
+            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+            return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
         });
     </script>
 }
