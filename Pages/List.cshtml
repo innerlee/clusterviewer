@@ -2,17 +2,30 @@
 @model ListModel
 @{
     ViewData["Title"] = "List Images From File";
+    var page = (int)(ViewData["page"]);
+    var totalitems = (int)(ViewData["totalitems"]);
+    var pagesize = (int)(ViewData["pagesize"]);
+    var npages = Math.Ceiling(1.0 * totalitems/pagesize);
 }
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
 
     <p>
-    <a href="~/list?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(ViewData["page"])&pagesize=@(ViewData["pagesize"])">
-    root: @(ViewData["root"]) <br/>
     list: @(ViewData["list"]) <br/>
-    page: @(ViewData["page"]) <br/>
-    pagesize: @(ViewData["pagesize"]) <br/>
-    total items: @(ViewData["totalitems"])</a>
+    root: @(ViewData["root"]) <br/>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-end">
+            <li class="page-item @(page<=1?"disabled": "")" href="~/select?list=@(ViewData["list"])">
+                <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page-1)&pagesize=@(pagesize)">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" herf="">@(page) / @(npages) pages, @(totalitems) items, @(pagesize) per page</a>
+            </li>
+            <li class="page-item @(page>=npages?"disabled": "")">
+                <a class="page-link" href="~/select?list=@(ViewData["list"])&root=@(ViewData["root"])&page=@(page+1)&pagesize=@(pagesize)">Next</a>
+            </li>
+        </ul>
+    </nav>
     </p>
 
     <div id="lightgallery">
