@@ -42,12 +42,12 @@ namespace viewer.Pages
             ViewData["pagesize"] = 500;
 
             string listfile = Request.Query["list"].ToString();
-            int page = 1;
+            int page = (int)(ViewData["page"]);
             if (int.TryParse(Request.Query["page"].ToString(), out page))
             {
                 ViewData["page"] = page;
             }
-            int pagesize = 500;
+            int pagesize = (int)(ViewData["pagesize"]);
             if (int.TryParse(Request.Query["pagesize"].ToString(), out pagesize))
             {
                 ViewData["pagesize"] = pagesize;
@@ -75,6 +75,8 @@ namespace viewer.Pages
                 }
             }
             ViewData["totalitems"] = items.Count;
+            page = (int)(ViewData["page"]);
+            pagesize = (int)(ViewData["pagesize"]);
             ViewData["items"] = items.Skip((page - 1) * pagesize).Take(pagesize).ToList();
         }
     }
