@@ -35,11 +35,13 @@ namespace viewer.Pages
 
         public void OnGet()
         {
+            ViewData["folder"] = Request.Query["folder"];
             ViewData["root"] = Request.Query["root"];
             ViewData["list"] = Request.Query["list"];
             ViewData["listfile"] = Path.GetFileName(ViewData["list"].ToString());
             ViewData["page"] = 1;
             ViewData["pagesize"] = 500;
+            var exts = new List<string>() { ".jpg", ".jpeg", ".png", ".gif" };
 
             string listfile = Request.Query["list"].ToString();
             int page = (int)(ViewData["page"]);
@@ -54,7 +56,19 @@ namespace viewer.Pages
             }
 
             List<SelectItem> items = new List<SelectItem>();
-            if (System.IO.File.Exists(listfile))
+            if (Directory.Exists(ViewData["folder"].ToString()))
+            {
+                var folder = ViewData["folder"].ToString();
+                ViewData["listfile"] = Path.GetFileName(folder);
+                foreach (var item in Directory.EnumerateFiles(folder))
+                {
+                    if (exts.Contains(Path.GetExtension(item).ToLower()))
+                    {
+                        items.Add(new SelectItem(item, item, Path.GetFileName(item)));
+                    }
+                }
+            }
+            else if (System.IO.File.Exists(listfile))
             {
                 using (var reader = new StreamReader(listfile))
                 {
@@ -71,7 +85,6 @@ namespace viewer.Pages
                             items.Add(new SelectItem(Path.Combine(ViewData["root"].ToString(), values[0]), values[0], values[0] + " " + values[1]));
                         }
                     }
-                    ViewData["items"] = items;
                 }
             }
             ViewData["totalitems"] = items.Count;
